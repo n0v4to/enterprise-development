@@ -5,12 +5,14 @@
 /// </summary>
 public class Car
 {
+    public int Id { get; set; }
+
     /// <summary>License plate of the car.</summary>
-    public string LicensePlate { get; set; }
+    public required string LicensePlate { get; set; }
 
     /// <summary>Color of the car.</summary>
-    public string Color { get; set; }
+    public required string Color { get; set; }
 
     /// <summary>Generation of the car model.</summary>
-    public ModelGeneration Generation { get; set; }
+    public required ModelGeneration Generation { get; set; }
 }

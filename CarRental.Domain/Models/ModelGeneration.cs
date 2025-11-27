@@ -5,18 +5,20 @@
 /// </summary>
 public class ModelGeneration
 {
+    public int Id { get; set; }
+
     /// <summary>Model to which this generation belongs.</summary>
-    public Model Model { get; set; }
+    public required Model Model { get; set; }
 
     /// <summary>Year of manufacture.</summary>
-    public int Year { get; set; }
+    public required int Year { get; set; }
 
     /// <summary>Engine volume in liters.</summary>
-    public double EngineVolume { get; set; }
+    public required double EngineVolume { get; set; }
 
     /// <summary>Type of transmission (AT, MT, CVT, etc.).</summary>
-    public string TransmissionType { get; set; }
+    public required TransmissionType TransmissionType { get; set; }
 
     /// <summary>Hourly rental rate in USD.</summary>
-    public decimal HourlyRate { get; set; }
+    public required decimal HourlyRate { get; set; }
 }

@@ -5,12 +5,14 @@
 /// </summary>
 public class Client
 {
+    public int Id { get; set; }
+
     /// <summary>Driver's license number of the client.</summary>
-    public string LicenseNumber { get; set; }
+    public required string LicenseNumber { get; set; }
 
     /// <summary>Full name of the client.</summary>
-    public string FullName { get; set; }
+    public required string FullName { get; set; }
 
     /// <summary>Date of birth of the client.</summary>
-    public DateTime BirthDate { get; set; }
+    public required DateTime BirthDate { get; set; }
 }
