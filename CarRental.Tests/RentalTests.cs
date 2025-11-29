@@ -10,22 +10,15 @@ namespace CarRental.Tests;
 /// <summary>
 /// Unit tests for car rental queries using DataSeed fixture.
 /// </summary>
-public class RentalTests : IClassFixture<DataSeed>
+public class RentalTests(DataSeed data) : IClassFixture<DataSeed>
 {
-    private readonly DataSeed _data;
-
-    /// <summary>
-    /// Primary constructor using the DataSeed fixture.
-    /// </summary>
-    public RentalTests(DataSeed data) => _data = data;
-
     /// <summary>
     /// Returns all clients who rented the Toyota Corolla, ordered by full name.
     /// </summary>
     [Fact]
     public void ClientsByModelShouldReturnClientsOrderedByFullName()
     {
-        var clients = _data.Rentals
+        var clients = data.Rentals
             .Where(r => r.Car?.Generation?.Model?.Name == "Toyota Corolla")
             .Select(r => r.Client)
             .Where(c => c != null)
@@ -44,13 +37,13 @@ public class RentalTests : IClassFixture<DataSeed>
 {
     var referenceDate = new DateTime(2025, 11, 28, 12, 0, 0);
 
-    var currentlyRented = _data.Rentals
+    var currentlyRented = data.Rentals
         .Where(r => r.StartTime <= referenceDate && referenceDate <= r.StartTime.AddHours(r.DurationHours))
         .Select(r => r.Car)
         .Distinct()
         .ToList();
 
-    var expectedCars = new List<Car> { _data.Cars[0], _data.Cars[2], _data.Cars[3], _data.Cars[1] };
+    var expectedCars = new List<Car> { data.Cars[0], data.Cars[2], data.Cars[3], data.Cars[1] };
 
     Assert.Equal(expectedCars.Count, currentlyRented.Count);
     Assert.All(expectedCars, car => Assert.Contains(car, currentlyRented));
@@ -62,7 +55,7 @@ public class RentalTests : IClassFixture<DataSeed>
     [Fact]
     public void Top5MostRentedCarsShouldReturnCorrectCars()
     {
-        var topCars = _data.Rentals
+        var topCars = data.Rentals
             .Where(r => r.Car != null)
             .GroupBy(r => r.Car)
             .OrderByDescending(g => g.Count())
@@ -84,9 +77,9 @@ public class RentalTests : IClassFixture<DataSeed>
     [Fact]
     public void RentalCountPerCarShouldReturnCorrectCounts()
     {
-        var counts = _data.Cars.ToDictionary(
+        var counts = data.Cars.ToDictionary(
             car => car.LicensePlate,
-            car => _data.Rentals.Count(r => r.Car == car)
+            car => data.Rentals.Count(r => r.Car == car)
         );
 
         Assert.Equal(3, counts["A111AA"]);
@@ -102,8 +95,8 @@ public class RentalTests : IClassFixture<DataSeed>
     [Fact]
     public void Top5ClientsByTotalSpentShouldReturnCorrectClients()
     {
-        var top5 = _data.Clients
-            .Select(c => new { c.FullName, TotalSpent = _data.Rentals.Where(r => r.Client == c).Sum(r => r.DurationHours * r.Car.Generation.HourlyRate) })
+        var top5 = data.Clients
+            .Select(c => new { c.FullName, TotalSpent = data.Rentals.Where(r => r.Client == c).Sum(r => r.DurationHours * r.Car.Generation.HourlyRate) })
             .OrderByDescending(x => x.TotalSpent)
             .Take(5)
             .ToList();

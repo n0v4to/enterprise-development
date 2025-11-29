@@ -1,6 +1,4 @@
-﻿using System.Security.Claims;
-
-namespace CarRental.Domain.Models;
+﻿namespace CarRental.Domain.Models;
 
 /// <summary>
 /// Represents a car model in the rental system.

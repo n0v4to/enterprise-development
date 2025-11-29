@@ -30,29 +30,29 @@ public class DataSeed
     public DataSeed()
     {
         Models = [
-            new() { Id = 1, Name = "Toyota Corolla", DriveType = CarRental.Domain.Models.DriveType.FWD, Seats = 5, BodyType = BodyType.Sedan, Class = CarClass.C },
-            new() { Id = 2, Name = "Ford Focus", DriveType = CarRental.Domain.Models.DriveType.FWD, Seats = 5, BodyType = BodyType.Hatchback, Class = CarClass.C },
-            new() { Id = 3, Name = "BMW X5", DriveType = CarRental.Domain.Models.DriveType.AWD, Seats = 5, BodyType = BodyType.SUV, Class = CarClass.E },
-            new() { Id = 4, Name = "Kia Rio", DriveType = CarRental.Domain.Models.DriveType.FWD, Seats = 5, BodyType = BodyType.Sedan, Class = CarClass.B },
-            new() { Id = 5, Name = "Mercedes E-Class", DriveType = CarRental.Domain.Models.DriveType.RWD, Seats = 5, BodyType = BodyType.Sedan, Class = CarClass.E },
-            new() { Id = 6, Name = "Audi A4", DriveType = CarRental.Domain.Models.DriveType.AWD, Seats = 5, BodyType = BodyType.Sedan, Class = CarClass.D },
-            new() { Id = 7, Name = "Hyundai Tucson", DriveType = CarRental.Domain.Models.DriveType.AWD, Seats = 5, BodyType = BodyType.SUV, Class = CarClass.C },
-            new() { Id = 8, Name = "Volkswagen Golf", DriveType = CarRental.Domain.Models.DriveType.FWD, Seats = 5, BodyType = BodyType.Hatchback, Class = CarClass.C },
-            new() { Id = 9, Name = "Nissan Qashqai", DriveType = CarRental.Domain.Models.DriveType.AWD, Seats = 5, BodyType = BodyType.SUV, Class = CarClass.C },
-            new() { Id = 10, Name = "Honda Civic", DriveType = CarRental.Domain.Models.DriveType.FWD, Seats = 5, BodyType = BodyType.Sedan, Class = CarClass.B }
+            new() { Id = 1, Name = "Toyota Corolla", DriveType = CarRental.Domain.Models.DriveType.Fwd, Seats = 5, BodyType = BodyType.Sedan, Class = CarClass.C },
+            new() { Id = 2, Name = "Ford Focus", DriveType = CarRental.Domain.Models.DriveType.Fwd, Seats = 5, BodyType = BodyType.Hatchback, Class = CarClass.C },
+            new() { Id = 3, Name = "BMW X5", DriveType = CarRental.Domain.Models.DriveType.Awd, Seats = 5, BodyType = BodyType.Suv, Class = CarClass.E },
+            new() { Id = 4, Name = "Kia Rio", DriveType = CarRental.Domain.Models.DriveType.Fwd, Seats = 5, BodyType = BodyType.Sedan, Class = CarClass.B },
+            new() { Id = 5, Name = "Mercedes E-Class", DriveType = CarRental.Domain.Models.DriveType.Rwd, Seats = 5, BodyType = BodyType.Sedan, Class = CarClass.E },
+            new() { Id = 6, Name = "Audi A4", DriveType = CarRental.Domain.Models.DriveType.Awd, Seats = 5, BodyType = BodyType.Sedan, Class = CarClass.D },
+            new() { Id = 7, Name = "Hyundai Tucson", DriveType = CarRental.Domain.Models.DriveType.Awd, Seats = 5, BodyType = BodyType.Suv, Class = CarClass.C },
+            new() { Id = 8, Name = "Volkswagen Golf", DriveType = CarRental.Domain.Models.DriveType.Fwd, Seats = 5, BodyType = BodyType.Hatchback, Class = CarClass.C },
+            new() { Id = 9, Name = "Nissan Qashqai", DriveType = CarRental.Domain.Models.DriveType.Awd, Seats = 5, BodyType = BodyType.Suv, Class = CarClass.C },
+            new() { Id = 10, Name = "Honda Civic", DriveType = CarRental.Domain.Models.DriveType.Fwd, Seats = 5, BodyType = BodyType.Sedan, Class = CarClass.B }
         ];
 
         Generations = [
-            new() { Id = 1, Model = Models[0], Year = 2020, EngineVolume = 1.6, TransmissionType = TransmissionType.AT, HourlyRate = 10 },
-            new() { Id = 2, Model = Models[1], Year = 2019, EngineVolume = 1.8, TransmissionType = TransmissionType.MT, HourlyRate = 9 },
-            new() { Id = 3, Model = Models[2], Year = 2021, EngineVolume = 3.0, TransmissionType = TransmissionType.AT, HourlyRate = 20 },
-            new() { Id = 4, Model = Models[3], Year = 2022, EngineVolume = 1.4, TransmissionType = TransmissionType.CVT, HourlyRate = 8 },
-            new() { Id = 5, Model = Models[4], Year = 2023, EngineVolume = 2.0, TransmissionType = TransmissionType.AT, HourlyRate = 25 },
-            new() { Id = 6, Model = Models[5], Year = 2020, EngineVolume = 2.0, TransmissionType = TransmissionType.AT, HourlyRate = 15 },
-            new() { Id = 7, Model = Models[6], Year = 2021, EngineVolume = 2.4, TransmissionType = TransmissionType.MT, HourlyRate = 12 },
-            new() { Id = 8, Model = Models[7], Year = 2018, EngineVolume = 1.6, TransmissionType = TransmissionType.CVT, HourlyRate = 9 },
-            new() { Id = 9, Model = Models[8], Year = 2019, EngineVolume = 2.0, TransmissionType = TransmissionType.AT, HourlyRate = 13 },
-            new() { Id = 10, Model = Models[9], Year = 2022, EngineVolume = 1.5, TransmissionType = TransmissionType.MT, HourlyRate = 8 }
+            new() { Id = 1, Model = Models[0], Year = 2020, EngineVolume = 1.6, TransmissionType = TransmissionType.At, HourlyRate = 10 },
+            new() { Id = 2, Model = Models[1], Year = 2019, EngineVolume = 1.8, TransmissionType = TransmissionType.Mt, HourlyRate = 9 },
+            new() { Id = 3, Model = Models[2], Year = 2021, EngineVolume = 3.0, TransmissionType = TransmissionType.At, HourlyRate = 20 },
+            new() { Id = 4, Model = Models[3], Year = 2022, EngineVolume = 1.4, TransmissionType = TransmissionType.Cvt, HourlyRate = 8 },
+            new() { Id = 5, Model = Models[4], Year = 2023, EngineVolume = 2.0, TransmissionType = TransmissionType.At, HourlyRate = 25 },
+            new() { Id = 6, Model = Models[5], Year = 2020, EngineVolume = 2.0, TransmissionType = TransmissionType.At, HourlyRate = 15 },
+            new() { Id = 7, Model = Models[6], Year = 2021, EngineVolume = 2.4, TransmissionType = TransmissionType.Mt, HourlyRate = 12 },
+            new() { Id = 8, Model = Models[7], Year = 2018, EngineVolume = 1.6, TransmissionType = TransmissionType.Cvt, HourlyRate = 9 },
+            new() { Id = 9, Model = Models[8], Year = 2019, EngineVolume = 2.0, TransmissionType = TransmissionType.At, HourlyRate = 13 },
+            new() { Id = 10, Model = Models[9], Year = 2022, EngineVolume = 1.5, TransmissionType = TransmissionType.Mt, HourlyRate = 8 }
         ];
 
         Cars = [
