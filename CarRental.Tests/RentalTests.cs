@@ -18,10 +18,19 @@ public class RentalTests(DataSeed data) : IClassFixture<DataSeed>
     [Fact]
     public void ClientsByModelShouldReturnClientsOrderedByFullName()
     {
+        var toyotaCorollaModelId = data.Models.First(m => m.Name == "Toyota Corolla").Id;
+        var toyotaCorollaGenerationIds = data.Generations
+            .Where(g => g.ModelId == toyotaCorollaModelId)
+            .Select(g => g.Id)
+            .ToList();
+        var toyotaCorollaCarIds = data.Cars
+            .Where(c => toyotaCorollaGenerationIds.Contains(c.GenerationId))
+            .Select(c => c.Id)
+            .ToList();
+
         var clients = data.Rentals
-            .Where(r => r.Car?.Generation?.Model?.Name == "Toyota Corolla")
-            .Select(r => r.Client)
-            .Where(c => c != null)
+            .Where(r => toyotaCorollaCarIds.Contains(r.CarId))
+            .Select(r => data.Clients.First(c => c.Id == r.ClientId))
             .Distinct()
             .OrderBy(c => c.FullName)
             .ToList();
@@ -34,20 +43,24 @@ public class RentalTests(DataSeed data) : IClassFixture<DataSeed>
     /// </summary>
     [Fact]
     public void CarsCurrentlyRentedShouldReturnCorrectCars()
-{
-    var referenceDate = new DateTime(2025, 11, 28, 12, 0, 0);
+    {
+        var referenceDate = new DateTime(2025, 11, 28, 12, 0, 0);
 
-    var currentlyRented = data.Rentals
-        .Where(r => r.StartTime <= referenceDate && referenceDate <= r.StartTime.AddHours(r.DurationHours))
-        .Select(r => r.Car)
-        .Distinct()
-        .ToList();
+        var currentlyRentedCarIds = data.Rentals
+            .Where(r => r.StartTime <= referenceDate && referenceDate <= r.StartTime.AddHours(r.DurationHours))
+            .Select(r => r.CarId)
+            .Distinct()
+            .ToList();
 
-    var expectedCars = new List<Car> { data.Cars[0], data.Cars[2], data.Cars[3], data.Cars[1] };
+        var currentlyRented = data.Cars
+            .Where(c => currentlyRentedCarIds.Contains(c.Id))
+            .ToList();
 
-    Assert.Equal(expectedCars.Count, currentlyRented.Count);
-    Assert.All(expectedCars, car => Assert.Contains(car, currentlyRented));
-}
+        var expectedCarIds = new List<int> { 1, 3, 4, 2 };
+
+        Assert.Equal(expectedCarIds.Count, currentlyRented.Count);
+        Assert.All(expectedCarIds, id => Assert.Contains(currentlyRented, c => c.Id == id));
+    }
 
     /// <summary>
     /// Returns top 5 most frequently rented cars.
@@ -55,12 +68,15 @@ public class RentalTests(DataSeed data) : IClassFixture<DataSeed>
     [Fact]
     public void Top5MostRentedCarsShouldReturnCorrectCars()
     {
-        var topCars = data.Rentals
-            .Where(r => r.Car != null)
-            .GroupBy(r => r.Car)
+        var topCarIds = data.Rentals
+            .GroupBy(r => r.CarId)
             .OrderByDescending(g => g.Count())
             .Take(5)
             .Select(g => g.Key)
+            .ToList();
+
+        var topCars = data.Cars
+            .Where(c => topCarIds.Contains(c.Id))
             .ToList();
 
         var expectedTop = new[] { "A111AA", "B222BB", "C333CC", "F666FF", "G777GG" };
@@ -79,7 +95,7 @@ public class RentalTests(DataSeed data) : IClassFixture<DataSeed>
     {
         var counts = data.Cars.ToDictionary(
             car => car.LicensePlate,
-            car => data.Rentals.Count(r => r.Car == car)
+            car => data.Rentals.Count(r => r.CarId == car.Id)
         );
 
         Assert.Equal(3, counts["A111AA"]);
@@ -96,7 +112,11 @@ public class RentalTests(DataSeed data) : IClassFixture<DataSeed>
     public void Top5ClientsByTotalSpentShouldReturnCorrectClients()
     {
         var top5 = data.Clients
-            .Select(c => new { c.FullName, TotalSpent = data.Rentals.Where(r => r.Client == c).Sum(r => r.DurationHours * r.Car.Generation.HourlyRate) })
+            .Select(c => new
+            {
+                c.FullName,
+                TotalSpent = data.Rentals.Where(r => r.ClientId == c.Id).Sum(r => r.TotalCost)
+            })
             .OrderByDescending(x => x.TotalSpent)
             .Take(5)
             .ToList();

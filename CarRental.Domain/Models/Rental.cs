@@ -7,11 +7,11 @@ public class Rental
 {
     public int Id { get; set; }
 
-    /// <summary>Client who rented the car.</summary>
-    public required Client Client { get; set; }
+    /// <summary>Id of the client who rented the car.</summary>
+    public required int ClientId { get; set; }
 
-    /// <summary>Car that was rented.</summary>
-    public required Car Car { get; set; }
+    /// <summary>Id of the car that was rented.</summary>
+    public required int CarId { get; set; }
 
     /// <summary>Start time of the rental.</summary>
     public required DateTime StartTime { get; set; }
@@ -19,6 +19,6 @@ public class Rental
     /// <summary>Duration of the rental in hours.</summary>
     public required int DurationHours { get; set; }
 
-    /// <summary>Total cost of the rental (HourlyRate * DurationHours).</summary>
-    public decimal TotalCost => Car.Generation.HourlyRate * DurationHours;
+    /// <summary>Total cost of the rental.</summary>
+    public required decimal TotalCost { get; set; }
 }

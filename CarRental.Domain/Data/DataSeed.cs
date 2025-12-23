@@ -43,29 +43,29 @@ public class DataSeed
         ];
 
         Generations = [
-            new() { Id = 1, Model = Models[0], Year = 2020, EngineVolume = 1.6, TransmissionType = TransmissionType.At, HourlyRate = 10 },
-            new() { Id = 2, Model = Models[1], Year = 2019, EngineVolume = 1.8, TransmissionType = TransmissionType.Mt, HourlyRate = 9 },
-            new() { Id = 3, Model = Models[2], Year = 2021, EngineVolume = 3.0, TransmissionType = TransmissionType.At, HourlyRate = 20 },
-            new() { Id = 4, Model = Models[3], Year = 2022, EngineVolume = 1.4, TransmissionType = TransmissionType.Cvt, HourlyRate = 8 },
-            new() { Id = 5, Model = Models[4], Year = 2023, EngineVolume = 2.0, TransmissionType = TransmissionType.At, HourlyRate = 25 },
-            new() { Id = 6, Model = Models[5], Year = 2020, EngineVolume = 2.0, TransmissionType = TransmissionType.At, HourlyRate = 15 },
-            new() { Id = 7, Model = Models[6], Year = 2021, EngineVolume = 2.4, TransmissionType = TransmissionType.Mt, HourlyRate = 12 },
-            new() { Id = 8, Model = Models[7], Year = 2018, EngineVolume = 1.6, TransmissionType = TransmissionType.Cvt, HourlyRate = 9 },
-            new() { Id = 9, Model = Models[8], Year = 2019, EngineVolume = 2.0, TransmissionType = TransmissionType.At, HourlyRate = 13 },
-            new() { Id = 10, Model = Models[9], Year = 2022, EngineVolume = 1.5, TransmissionType = TransmissionType.Mt, HourlyRate = 8 }
+            new() { Id = 1, ModelId = 1, Year = 2020, EngineVolume = 1.6, TransmissionType = TransmissionType.At, HourlyRate = 10 },
+            new() { Id = 2, ModelId = 2, Year = 2019, EngineVolume = 1.8, TransmissionType = TransmissionType.Mt, HourlyRate = 9 },
+            new() { Id = 3, ModelId = 3, Year = 2021, EngineVolume = 3.0, TransmissionType = TransmissionType.At, HourlyRate = 20 },
+            new() { Id = 4, ModelId = 4, Year = 2022, EngineVolume = 1.4, TransmissionType = TransmissionType.Cvt, HourlyRate = 8 },
+            new() { Id = 5, ModelId = 5, Year = 2023, EngineVolume = 2.0, TransmissionType = TransmissionType.At, HourlyRate = 25 },
+            new() { Id = 6, ModelId = 6, Year = 2020, EngineVolume = 2.0, TransmissionType = TransmissionType.At, HourlyRate = 15 },
+            new() { Id = 7, ModelId = 7, Year = 2021, EngineVolume = 2.4, TransmissionType = TransmissionType.Mt, HourlyRate = 12 },
+            new() { Id = 8, ModelId = 8, Year = 2018, EngineVolume = 1.6, TransmissionType = TransmissionType.Cvt, HourlyRate = 9 },
+            new() { Id = 9, ModelId = 9, Year = 2019, EngineVolume = 2.0, TransmissionType = TransmissionType.At, HourlyRate = 13 },
+            new() { Id = 10, ModelId = 10, Year = 2022, EngineVolume = 1.5, TransmissionType = TransmissionType.Mt, HourlyRate = 8 }
         ];
 
         Cars = [
-            new() { Id = 1, LicensePlate = "A111AA", Color = "Red", Generation = Generations[0] },
-            new() { Id = 2, LicensePlate = "B222BB", Color = "Blue", Generation = Generations[1] },
-            new() { Id = 3, LicensePlate = "C333CC", Color = "Black", Generation = Generations[2] },
-            new() { Id = 4, LicensePlate = "D444DD", Color = "White", Generation = Generations[3] },
-            new() { Id = 5, LicensePlate = "E555EE", Color = "Silver", Generation = Generations[4] },
-            new() { Id = 6, LicensePlate = "F666FF", Color = "Green", Generation = Generations[5] },
-            new() { Id = 7, LicensePlate = "G777GG", Color = "Yellow", Generation = Generations[6] },
-            new() { Id = 8, LicensePlate = "H888HH", Color = "Gray", Generation = Generations[7] },
-            new() { Id = 9, LicensePlate = "I999II", Color = "Blue", Generation = Generations[8] },
-            new() { Id = 10, LicensePlate = "J000JJ", Color = "Black", Generation = Generations[9] }
+            new() { Id = 1, LicensePlate = "A111AA", Color = "Red", GenerationId = 1 },
+            new() { Id = 2, LicensePlate = "B222BB", Color = "Blue", GenerationId = 2 },
+            new() { Id = 3, LicensePlate = "C333CC", Color = "Black", GenerationId = 3 },
+            new() { Id = 4, LicensePlate = "D444DD", Color = "White", GenerationId = 4 },
+            new() { Id = 5, LicensePlate = "E555EE", Color = "Silver", GenerationId = 5 },
+            new() { Id = 6, LicensePlate = "F666FF", Color = "Green", GenerationId = 6 },
+            new() { Id = 7, LicensePlate = "G777GG", Color = "Yellow", GenerationId = 7 },
+            new() { Id = 8, LicensePlate = "H888HH", Color = "Gray", GenerationId = 8 },
+            new() { Id = 9, LicensePlate = "I999II", Color = "Blue", GenerationId = 9 },
+            new() { Id = 10, LicensePlate = "J000JJ", Color = "Black", GenerationId = 10 }
         ];
 
         Clients = [
@@ -82,19 +82,19 @@ public class DataSeed
         ];
 
         Rentals = [
-            new() { Id = 1, Client = Clients[0], Car = Cars[0], StartTime = _baseDate.AddHours(-2), DurationHours = 5 },
-            new() { Id = 2, Client = Clients[1], Car = Cars[1], StartTime = _baseDate.AddHours(-1), DurationHours = 6 },
-            new() { Id = 3, Client = Clients[2], Car = Cars[2], StartTime = _baseDate.AddHours(-3), DurationHours = 4 },
-            new() { Id = 4, Client = Clients[3], Car = Cars[3], StartTime = _baseDate.AddHours(-2), DurationHours = 3 },
-            new() { Id = 5, Client = Clients[4], Car = Cars[0], StartTime = _baseDate.AddHours(-20), DurationHours = 3 },
-            new() { Id = 6, Client = Clients[5], Car = Cars[0], StartTime = _baseDate.AddHours(-50), DurationHours = 5 },
-            new() { Id = 7, Client = Clients[6], Car = Cars[1], StartTime = _baseDate.AddHours(-30), DurationHours = 4 },
-            new() { Id = 8, Client = Clients[7], Car = Cars[4], StartTime = _baseDate.AddHours(-15), DurationHours = 5 },
-            new() { Id = 9, Client = Clients[6], Car = Cars[5], StartTime = _baseDate.AddHours(-40), DurationHours = 10 },
-            new() { Id = 10, Client = Clients[7], Car = Cars[6], StartTime = _baseDate.AddHours(-50), DurationHours = 12 },
-            new() { Id = 11, Client = Clients[2], Car = Cars[2], StartTime = _baseDate.AddHours(-60), DurationHours = 8 },
-            new() { Id = 12, Client = Clients[0], Car = Cars[5], StartTime = _baseDate.AddHours(-80), DurationHours = 6 },
-            new() { Id = 13, Client = Clients[3], Car = Cars[6], StartTime = _baseDate.AddHours(-100), DurationHours = 6 }
+            new() { Id = 1, ClientId = 1, CarId = 1, StartTime = _baseDate.AddHours(-2), DurationHours = 5, TotalCost = 50 },
+            new() { Id = 2, ClientId = 2, CarId = 2, StartTime = _baseDate.AddHours(-1), DurationHours = 6, TotalCost = 54 },
+            new() { Id = 3, ClientId = 3, CarId = 3, StartTime = _baseDate.AddHours(-3), DurationHours = 4, TotalCost = 80 },
+            new() { Id = 4, ClientId = 4, CarId = 4, StartTime = _baseDate.AddHours(-2), DurationHours = 3, TotalCost = 24 },
+            new() { Id = 5, ClientId = 5, CarId = 1, StartTime = _baseDate.AddHours(-20), DurationHours = 3, TotalCost = 30 },
+            new() { Id = 6, ClientId = 6, CarId = 1, StartTime = _baseDate.AddHours(-50), DurationHours = 5, TotalCost = 50 },
+            new() { Id = 7, ClientId = 7, CarId = 2, StartTime = _baseDate.AddHours(-30), DurationHours = 4, TotalCost = 36 },
+            new() { Id = 8, ClientId = 8, CarId = 5, StartTime = _baseDate.AddHours(-15), DurationHours = 5, TotalCost = 125 },
+            new() { Id = 9, ClientId = 7, CarId = 6, StartTime = _baseDate.AddHours(-40), DurationHours = 10, TotalCost = 150 },
+            new() { Id = 10, ClientId = 8, CarId = 7, StartTime = _baseDate.AddHours(-50), DurationHours = 12, TotalCost = 144 },
+            new() { Id = 11, ClientId = 3, CarId = 3, StartTime = _baseDate.AddHours(-60), DurationHours = 8, TotalCost = 160 },
+            new() { Id = 12, ClientId = 1, CarId = 6, StartTime = _baseDate.AddHours(-80), DurationHours = 6, TotalCost = 90 },
+            new() { Id = 13, ClientId = 4, CarId = 7, StartTime = _baseDate.AddHours(-100), DurationHours = 6, TotalCost = 72 }
         ];
     }
 }

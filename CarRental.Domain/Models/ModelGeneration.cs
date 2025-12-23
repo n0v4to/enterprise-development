@@ -7,8 +7,8 @@ public class ModelGeneration
 {
     public int Id { get; set; }
 
-    /// <summary>Model to which this generation belongs.</summary>
-    public required Model Model { get; set; }
+    /// <summary>Id of the model to which this generation belongs.</summary>
+    public required int ModelId { get; set; }
 
     /// <summary>Year of manufacture.</summary>
     public required int Year { get; set; }
