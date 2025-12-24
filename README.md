@@ -128,7 +128,7 @@ CarRental.sln
 - `GeneratorController` - API-контроллер для запуска генерации
 - `RentalGenerator` - Генерация `RentalCreateUpdateDto` с помощью Bogus
 - `RabbitMqProducer` - Публикация сообщений в очередь RabbitMQ
-- `GeneratorOptions` - Настройки генерации (ClientId: 1-20, CarId: 1-20, и т.д.)
+- `GeneratorOptions` - Настройки генерации (ClientId: 1-10, CarId: 1-10, и т.д.)
 - `RabbitMqOptions` - Настройки подключения к RabbitMQ
 
 ### CarRental.Infrastructure.RabbitMq (Consumer)
