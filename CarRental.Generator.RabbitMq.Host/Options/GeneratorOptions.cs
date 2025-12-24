@@ -18,7 +18,7 @@ public class GeneratorOptions
     /// <summary>
     /// Maximum ClientId for generated rentals
     /// </summary>
-    public int MaxClientId { get; set; } = 20;
+    public int MaxClientId { get; set; } = 10;
 
     /// <summary>
     /// Minimum CarId for generated rentals
@@ -28,7 +28,7 @@ public class GeneratorOptions
     /// <summary>
     /// Maximum CarId for generated rentals
     /// </summary>
-    public int MaxCarId { get; set; } = 20;
+    public int MaxCarId { get; set; } = 10;
 
     /// <summary>
     /// Minimum rental duration in hours
