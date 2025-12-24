@@ -30,7 +30,7 @@ public class AnalyticsController(IAnalyticsService analyticsService, ILogger<Ana
         catch (Exception ex)
         {
             logger.LogError(ex, "{method} failed", nameof(GetClientsByModel));
-            return StatusCode(500, ex.Message);
+            return StatusCode(500, "Internal server error");
         }
     }
 
@@ -52,7 +52,7 @@ public class AnalyticsController(IAnalyticsService analyticsService, ILogger<Ana
         catch (Exception ex)
         {
             logger.LogError(ex, "{method} failed", nameof(GetCurrentlyRented));
-            return StatusCode(500, ex.Message);
+            return StatusCode(500, "Internal server error");
         }
     }
 
@@ -74,7 +74,7 @@ public class AnalyticsController(IAnalyticsService analyticsService, ILogger<Ana
         catch (Exception ex)
         {
             logger.LogError(ex, "{method} failed", nameof(GetTopCars));
-            return StatusCode(500, ex.Message);
+            return StatusCode(500, "Internal server error");
         }
     }
 
@@ -95,7 +95,7 @@ public class AnalyticsController(IAnalyticsService analyticsService, ILogger<Ana
         catch (Exception ex)
         {
             logger.LogError(ex, "{method} failed", nameof(GetRentalCountPerCar));
-            return StatusCode(500, ex.Message);
+            return StatusCode(500, "Internal server error");
         }
     }
 
@@ -117,7 +117,7 @@ public class AnalyticsController(IAnalyticsService analyticsService, ILogger<Ana
         catch (Exception ex)
         {
             logger.LogError(ex, "{method} failed", nameof(GetTopClients));
-            return StatusCode(500, ex.Message);
+            return StatusCode(500, "Internal server error");
         }
     }
 }

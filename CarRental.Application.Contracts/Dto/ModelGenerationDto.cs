@@ -13,9 +13,9 @@ public class ModelGenerationDto
     public int Id { get; set; }
 
     /// <summary>
-    /// Id of the model to which this generation belongs.
+    /// Name of the model to which this generation belongs.
     /// </summary>
-    public required int ModelId { get; set; }
+    public required string ModelName { get; set; }
 
     /// <summary>
     /// Year of manufacture.

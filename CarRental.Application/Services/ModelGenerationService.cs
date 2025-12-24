@@ -3,7 +3,6 @@ using CarRental.Application.Contracts;
 using CarRental.Application.Contracts.Dto;
 using CarRental.Domain;
 using CarRental.Domain.Models;
-using System.Linq;
 
 namespace CarRental.Application.Services;
 
@@ -19,7 +18,18 @@ public class ModelGenerationService(IRepository<ModelGeneration> generationRepos
     public async Task<IEnumerable<ModelGenerationDto>> GetAllAsync()
     {
         var generations = await generationRepository.GetAllAsync();
-        return mapper.Map<IEnumerable<ModelGenerationDto>>(generations);
+        var models = await modelRepository.GetAllAsync();
+        var modelNames = models.ToDictionary(m => m.Id, m => m.Name);
+
+        return generations.Select(generation => new ModelGenerationDto
+        {
+            Id = generation.Id,
+            ModelName = modelNames.GetValueOrDefault(generation.ModelId, "Unknown"),
+            Year = generation.Year,
+            EngineVolume = generation.EngineVolume,
+            TransmissionType = generation.TransmissionType,
+            HourlyRate = generation.HourlyRate
+        });
     }
 
     /// <summary>
@@ -29,7 +39,19 @@ public class ModelGenerationService(IRepository<ModelGeneration> generationRepos
     public async Task<ModelGenerationDto?> GetByIdAsync(int id)
     {
         var generation = await generationRepository.GetByIdAsync(id);
-        return mapper.Map<ModelGenerationDto?>(generation);
+        if (generation is null)
+            return null;
+
+        var model = await modelRepository.GetByIdAsync(generation.ModelId);
+        return new ModelGenerationDto
+        {
+            Id = generation.Id,
+            ModelName = model?.Name ?? "Unknown",
+            Year = generation.Year,
+            EngineVolume = generation.EngineVolume,
+            TransmissionType = generation.TransmissionType,
+            HourlyRate = generation.HourlyRate
+        };
     }
 
     /// <summary>
@@ -38,13 +60,22 @@ public class ModelGenerationService(IRepository<ModelGeneration> generationRepos
     /// <param name="createDto">Generation for creation.</param>
     public async Task<ModelGenerationDto> CreateAsync(ModelGenerationCreateUpdateDto createDto)
     {
-        _ = await modelRepository.GetByIdAsync(createDto.ModelId) ?? throw new KeyNotFoundException("Model with the specified ID does not exist.");
+        var model = await modelRepository.GetByIdAsync(createDto.ModelId) ?? throw new KeyNotFoundException("Model with the specified ID does not exist.");
         var nextId = (await generationRepository.GetAllAsync()).Select(g => g.Id).DefaultIfEmpty(0).Max() + 1;
 
         var generation = mapper.Map<ModelGeneration>(createDto);
         generation.Id = nextId;
         await generationRepository.AddAsync(generation);
-        return mapper.Map<ModelGenerationDto>(generation);
+
+        return new ModelGenerationDto
+        {
+            Id = generation.Id,
+            ModelName = model.Name,
+            Year = generation.Year,
+            EngineVolume = generation.EngineVolume,
+            TransmissionType = generation.TransmissionType,
+            HourlyRate = generation.HourlyRate
+        };
     }
 
     /// <summary>
@@ -56,10 +87,19 @@ public class ModelGenerationService(IRepository<ModelGeneration> generationRepos
     {
         var generation = await generationRepository.GetByIdAsync(id) ?? throw new KeyNotFoundException("Model generation with the specified ID does not exist.");
 
-        _ = await modelRepository.GetByIdAsync(updateDto.ModelId) ?? throw new KeyNotFoundException("Model with the specified ID does not exist.");
+        var model = await modelRepository.GetByIdAsync(updateDto.ModelId) ?? throw new KeyNotFoundException("Model with the specified ID does not exist.");
         mapper.Map(updateDto, generation);
         await generationRepository.UpdateAsync(generation);
-        return mapper.Map<ModelGenerationDto>(generation);
+
+        return new ModelGenerationDto
+        {
+            Id = generation.Id,
+            ModelName = model.Name,
+            Year = generation.Year,
+            EngineVolume = generation.EngineVolume,
+            TransmissionType = generation.TransmissionType,
+            HourlyRate = generation.HourlyRate
+        };
     }
 
     /// <summary>

@@ -11,14 +11,14 @@ public class RentalDto
     public int Id { get; set; }
 
     /// <summary>
-    /// Id of the client who rented the car.
+    /// Full name of the client who rented the car.
     /// </summary>
-    public required int ClientId { get; set; }
+    public required string ClientFullName { get; set; }
 
     /// <summary>
-    /// Id of the car that was rented.
+    /// License plate of the rented car.
     /// </summary>
-    public required int CarId { get; set; }
+    public required string CarLicensePlate { get; set; }
 
     /// <summary>
     /// Start time of the rental.

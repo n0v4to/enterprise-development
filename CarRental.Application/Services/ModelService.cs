@@ -3,7 +3,6 @@ using CarRental.Application.Contracts;
 using CarRental.Application.Contracts.Dto;
 using CarRental.Domain;
 using CarRental.Domain.Models;
-using System.Linq;
 
 namespace CarRental.Application.Services;
 

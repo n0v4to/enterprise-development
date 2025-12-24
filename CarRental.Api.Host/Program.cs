@@ -15,11 +15,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
 
-builder.Services.AddTransient<IRepository<Car>, CarRepository>();
-builder.Services.AddTransient<IRepository<Client>, ClientRepository>();
-builder.Services.AddTransient<IRepository<Model>, ModelRepository>();
-builder.Services.AddTransient<IRepository<ModelGeneration>, ModelGenerationRepository>();
-builder.Services.AddTransient<IRepository<Rental>, RentalRepository>();
+builder.Services.AddScoped<IRepository<Car>, CarRepository>();
+builder.Services.AddScoped<IRepository<Client>, ClientRepository>();
+builder.Services.AddScoped<IRepository<Model>, ModelRepository>();
+builder.Services.AddScoped<IRepository<ModelGeneration>, ModelGenerationRepository>();
+builder.Services.AddScoped<IRepository<Rental>, RentalRepository>();
 
 builder.Services.AddScoped<IApplicationService<CarDto, CarCreateUpdateDto>, CarService>();
 builder.Services.AddScoped<IApplicationService<ClientDto, ClientCreateUpdateDto>, ClientService>();

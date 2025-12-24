@@ -3,7 +3,6 @@ using CarRental.Application.Contracts;
 using CarRental.Application.Contracts.Dto;
 using CarRental.Domain;
 using CarRental.Domain.Models;
-using System.Linq;
 
 namespace CarRental.Application.Services;
 
@@ -19,7 +18,16 @@ public class CarService(IRepository<Car> carRepository, IRepository<ModelGenerat
     public async Task<IEnumerable<CarDto>> GetAllAsync()
     {
         var cars = await carRepository.GetAllAsync();
-        return mapper.Map<IEnumerable<CarDto>>(cars);
+        var generations = await generationRepository.GetAllAsync();
+        var generationNames = generations.ToDictionary(g => g.Id, g => $"{g.Year} ({g.EngineVolume}L)");
+
+        return cars.Select(car => new CarDto
+        {
+            Id = car.Id,
+            LicensePlate = car.LicensePlate,
+            Color = car.Color,
+            GenerationName = generationNames.GetValueOrDefault(car.GenerationId, "Unknown")
+        });
     }
 
     /// <summary>
@@ -29,7 +37,17 @@ public class CarService(IRepository<Car> carRepository, IRepository<ModelGenerat
     public async Task<CarDto?> GetByIdAsync(int id)
     {
         var car = await carRepository.GetByIdAsync(id);
-        return mapper.Map<CarDto?>(car);
+        if (car is null)
+            return null;
+
+        var generation = await generationRepository.GetByIdAsync(car.GenerationId);
+        return new CarDto
+        {
+            Id = car.Id,
+            LicensePlate = car.LicensePlate,
+            Color = car.Color,
+            GenerationName = generation is not null ? $"{generation.Year} ({generation.EngineVolume}L)" : "Unknown"
+        };
     }
 
     /// <summary>
@@ -38,13 +56,20 @@ public class CarService(IRepository<Car> carRepository, IRepository<ModelGenerat
     /// <param name="createDto">Car for creation.</param>
     public async Task<CarDto> CreateAsync(CarCreateUpdateDto createDto)
     {
-        _ = await generationRepository.GetByIdAsync(createDto.GenerationId) ?? throw new KeyNotFoundException("Model generation with the specified ID does not exist.");
+        var generation = await generationRepository.GetByIdAsync(createDto.GenerationId) ?? throw new KeyNotFoundException("Model generation with the specified ID does not exist.");
         var nextId = (await carRepository.GetAllAsync()).Select(c => c.Id).DefaultIfEmpty(0).Max() + 1;
 
         var car = mapper.Map<Car>(createDto);
         car.Id = nextId;
         await carRepository.AddAsync(car);
-        return mapper.Map<CarDto>(car);
+
+        return new CarDto
+        {
+            Id = car.Id,
+            LicensePlate = car.LicensePlate,
+            Color = car.Color,
+            GenerationName = $"{generation.Year} ({generation.EngineVolume}L)"
+        };
     }
 
     /// <summary>
@@ -56,10 +81,17 @@ public class CarService(IRepository<Car> carRepository, IRepository<ModelGenerat
     {
         var car = await carRepository.GetByIdAsync(id) ?? throw new KeyNotFoundException("Car with the specified ID does not exist.");
 
-        _ = await generationRepository.GetByIdAsync(updateDto.GenerationId) ?? throw new KeyNotFoundException("Model generation with the specified ID does not exist.");
+        var generation = await generationRepository.GetByIdAsync(updateDto.GenerationId) ?? throw new KeyNotFoundException("Model generation with the specified ID does not exist.");
         mapper.Map(updateDto, car);
         await carRepository.UpdateAsync(car);
-        return mapper.Map<CarDto>(car);
+
+        return new CarDto
+        {
+            Id = car.Id,
+            LicensePlate = car.LicensePlate,
+            Color = car.Color,
+            GenerationName = $"{generation.Year} ({generation.EngineVolume}L)"
+        };
     }
 
     /// <summary>

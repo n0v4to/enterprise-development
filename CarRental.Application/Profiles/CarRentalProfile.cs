@@ -14,7 +14,6 @@ public class CarRentalProfile : Profile
     /// </summary>
     public CarRentalProfile()
     {
-        CreateMap<Car, CarDto>().ReverseMap();
         CreateMap<Car, CarCreateUpdateDto>().ReverseMap();
 
         CreateMap<Client, ClientDto>().ReverseMap();
@@ -23,10 +22,8 @@ public class CarRentalProfile : Profile
         CreateMap<Model, ModelDto>().ReverseMap();
         CreateMap<Model, ModelCreateUpdateDto>().ReverseMap();
 
-        CreateMap<ModelGeneration, ModelGenerationDto>().ReverseMap();
         CreateMap<ModelGeneration, ModelGenerationCreateUpdateDto>().ReverseMap();
 
-        CreateMap<Rental, RentalDto>().ReverseMap();
         CreateMap<Rental, RentalCreateUpdateDto>().ReverseMap();
     }
 }

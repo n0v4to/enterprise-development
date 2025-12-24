@@ -8,7 +8,6 @@ namespace CarRental.Api.Host.Controllers;
 /// </summary>
 /// <typeparam name="TDto">DTO type used for Get requests</typeparam>
 /// <typeparam name="TCreateUpdateDto">DTO type used for Post/Put requests</typeparam>
-/// <typeparam name="TKey">Type of the DTO identifier</typeparam>
 /// <param name="appService">Service used to manipulate DTOs</param>
 /// <param name="logger">Logger instance</param>
 [Route("api/[controller]")]
@@ -43,8 +42,8 @@ public abstract class CrudControllerBase<TDto, TCreateUpdateDto>(IApplicationSer
         }
         catch (Exception ex)
         {
-            logger.LogError("An exception happened during {method} method of {controller}: {@exception}", nameof(Create), GetType().Name, ex);
-            return StatusCode(500, $"{ex.Message}\n\r{ex.InnerException?.Message}");
+            logger.LogError(ex, "An exception happened during {method} method of {controller}", nameof(Create), GetType().Name);
+            return StatusCode(500, "Internal server error");
         }
     }
 
@@ -74,8 +73,8 @@ public abstract class CrudControllerBase<TDto, TCreateUpdateDto>(IApplicationSer
         }
         catch (Exception ex)
         {
-            logger.LogError("An exception happened during {method} method of {controller}: {@exception}", nameof(Update), GetType().Name, ex);
-            return StatusCode(500, $"{ex.Message}\n\r{ex.InnerException?.Message}");
+            logger.LogError(ex, "An exception happened during {method} method of {controller}", nameof(Update), GetType().Name);
+            return StatusCode(500, "Internal server error");
         }
     }
 
@@ -98,8 +97,8 @@ public abstract class CrudControllerBase<TDto, TCreateUpdateDto>(IApplicationSer
         }
         catch (Exception ex)
         {
-            logger.LogError("An exception happened during {method} method of {controller}: {@exception}", nameof(Delete), GetType().Name, ex);
-            return StatusCode(500, $"{ex.Message}\n\r{ex.InnerException?.Message}");
+            logger.LogError(ex, "An exception happened during {method} method of {controller}", nameof(Delete), GetType().Name);
+            return StatusCode(500, "Internal server error");
         }
     }
 
@@ -121,8 +120,8 @@ public abstract class CrudControllerBase<TDto, TCreateUpdateDto>(IApplicationSer
         }
         catch (Exception ex)
         {
-            logger.LogError("An exception happened during {method} method of {controller}: {@exception}", nameof(GetAll), GetType().Name, ex);
-            return StatusCode(500, $"{ex.Message}\n\r{ex.InnerException?.Message}");
+            logger.LogError(ex, "An exception happened during {method} method of {controller}", nameof(GetAll), GetType().Name);
+            return StatusCode(500, "Internal server error");
         }
     }
 
@@ -146,8 +145,8 @@ public abstract class CrudControllerBase<TDto, TCreateUpdateDto>(IApplicationSer
         }
         catch (Exception ex)
         {
-            logger.LogError("An exception happened during {method} method of {controller}: {@exception}", nameof(Get), GetType().Name, ex);
-            return StatusCode(500, $"{ex.Message}\n\r{ex.InnerException?.Message}");
+            logger.LogError(ex, "An exception happened during {method} method of {controller}", nameof(Get), GetType().Name);
+            return StatusCode(500, "Internal server error");
         }
     }
 }

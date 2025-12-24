@@ -21,7 +21,7 @@ public class CarDto
     public required string Color { get; set; }
 
     /// <summary>
-    /// Id of the car model generation.
+    /// Name of the car model generation.
     /// </summary>
-    public required int GenerationId { get; set; }
+    public required string GenerationName { get; set; }
 }

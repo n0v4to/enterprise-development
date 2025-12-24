@@ -59,6 +59,8 @@ public class AnalyticsService(
     {
         var rentals = await rentalRepository.GetAllAsync();
         var cars = await carRepository.GetAllAsync();
+        var generations = await generationRepository.GetAllAsync();
+        var generationNames = generations.ToDictionary(g => g.Id, g => $"{g.Year} ({g.EngineVolume}L)");
 
         var activeCarIds = rentals
             .Where(r => referenceDate >= r.StartTime && referenceDate < r.StartTime.AddHours(r.DurationHours))
@@ -67,7 +69,13 @@ public class AnalyticsService(
             .ToHashSet();
 
         var activeCars = cars.Where(c => activeCarIds.Contains(c.Id));
-        return mapper.Map<IEnumerable<CarDto>>(activeCars);
+        return activeCars.Select(car => new CarDto
+        {
+            Id = car.Id,
+            LicensePlate = car.LicensePlate,
+            Color = car.Color,
+            GenerationName = generationNames.GetValueOrDefault(car.GenerationId, "Unknown")
+        });
     }
 
     /// <summary>
@@ -83,6 +91,8 @@ public class AnalyticsService(
 
         var rentals = await rentalRepository.GetAllAsync();
         var cars = await carRepository.GetAllAsync();
+        var generations = await generationRepository.GetAllAsync();
+        var generationNames = generations.ToDictionary(g => g.Id, g => $"{g.Year} ({g.EngineVolume}L)");
 
         var topCarIds = rentals
             .GroupBy(r => r.CarId)
@@ -98,7 +108,13 @@ public class AnalyticsService(
                 car => car.Id,
                 (rc, car) => new CarRentalCountDto
                 {
-                    Car = mapper.Map<CarDto>(car),
+                    Car = new CarDto
+                    {
+                        Id = car.Id,
+                        LicensePlate = car.LicensePlate,
+                        Color = car.Color,
+                        GenerationName = generationNames.GetValueOrDefault(car.GenerationId, "Unknown")
+                    },
                     RentalCount = rc.RentalCount
                 })
             .ToList();
@@ -113,6 +129,8 @@ public class AnalyticsService(
     {
         var rentals = await rentalRepository.GetAllAsync();
         var cars = await carRepository.GetAllAsync();
+        var generations = await generationRepository.GetAllAsync();
+        var generationNames = generations.ToDictionary(g => g.Id, g => $"{g.Year} ({g.EngineVolume}L)");
 
         var counts = rentals
             .GroupBy(r => r.CarId)
@@ -122,7 +140,13 @@ public class AnalyticsService(
         var result = cars
             .Select(car => new CarRentalCountDto
             {
-                Car = mapper.Map<CarDto>(car),
+                Car = new CarDto
+                {
+                    Id = car.Id,
+                    LicensePlate = car.LicensePlate,
+                    Color = car.Color,
+                    GenerationName = generationNames.GetValueOrDefault(car.GenerationId, "Unknown")
+                },
                 RentalCount = counts.TryGetValue(car.Id, out var count) ? count : 0
             })
             .ToList();
