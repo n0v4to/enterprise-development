@@ -102,3 +102,50 @@ CarRental.sln
 Настроен оркестратор .NET Aspire для автоматического запуска:
 - Контейнера MongoDB
 - API-сервера с подключением к базе данных
+
+---
+
+# Лабораторная работа №4 — «Брокер сообщений»
+
+В рамках лабораторной работы реализована интеграция с брокером сообщений RabbitMQ для асинхронной генерации контрактов аренды.
+
+## Структура решения (дополнение)
+
+```
+CarRental.sln
+├── ...
+├── CarRental.Generator.RabbitMq.Host/  — Генератор контрактов + Producer (ASP.NET Core WebAPI)
+└── CarRental.Infrastructure.RabbitMq/  — Consumer для обработки сообщений (BackgroundService)
+```
+
+## Компоненты
+
+### CarRental.Generator.RabbitMq.Host (Генератор + Producer)
+
+Отдельное приложение без референсов к серверным проектам.
+
+
+- `GeneratorController` - API-контроллер для запуска генерации
+- `RentalGenerator` - Генерация `RentalCreateUpdateDto` с помощью Bogus
+- `RabbitMqProducer` - Публикация сообщений в очередь RabbitMQ
+- `GeneratorOptions` - Настройки генерации (ClientId: 1-20, CarId: 1-20, и т.д.)
+- `RabbitMqOptions` - Настройки подключения к RabbitMQ
+
+### CarRental.Infrastructure.RabbitMq (Consumer)
+
+- `RabbitMqConsumer` - `BackgroundService` для получения сообщений из очереди
+- `RabbitMqOptions` - Настройки подключения и ретраев
+
+## Обработка ошибок
+
+- **Polly retries** — экспоненциальный backoff при подключении к RabbitMQ
+- **KeyNotFoundException** — логирование и пропуск при отсутствии связанных сущностей (Client/Car)
+- Настраиваемое количество попыток и задержка через `appsettings.json`
+
+## Оркестрация (.NET Aspire)
+
+Обновлённая конфигурация AppHost:
+- MongoDB контейнер
+- RabbitMQ с Management Plugin (веб-интерфейс)
+- API-сервер с подключением к MongoDB и RabbitMQ
+- Генератор контрактов с подключением к RabbitMQ

@@ -7,6 +7,8 @@ using CarRental.Domain.Data;
 using CarRental.Domain.Models;
 using CarRental.Infrastructure.EfCore;
 using CarRental.Infrastructure.EfCore.Repositories;
+using CarRental.Infrastructure.RabbitMq.Options;
+using CarRental.Infrastructure.RabbitMq.Services;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
 using System.Text.Json.Serialization;
@@ -14,6 +16,12 @@ using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
+
+builder.AddRabbitMQClient("rabbitMqConnection");
+
+builder.Services.Configure<RabbitMqOptions>(builder.Configuration.GetSection(RabbitMqOptions.SectionName));
+
+builder.Services.AddHostedService<RabbitMqConsumer>();
 
 builder.Services.AddScoped<IRepository<Car>, CarRepository>();
 builder.Services.AddScoped<IRepository<Client>, ClientRepository>();

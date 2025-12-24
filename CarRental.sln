@@ -19,6 +19,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRental.AppHost", "CarRen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRental.ServiceDefaults", "CarRental.ServiceDefaults\CarRental.ServiceDefaults.csproj", "{5D2BF94D-59D5-96DD-67AA-FD337168498F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRental.Infrastructure.RabbitMq", "CarRental.Infrastructure.RabbitMq\CarRental.Infrastructure.RabbitMq.csproj", "{4C10D4FA-BA88-488E-851C-2E447E6BD26B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRental.Generator.RabbitMq.Host", "CarRental.Generator.RabbitMq.Host\CarRental.Generator.RabbitMq.Host.csproj", "{A84EF7B5-22E7-4BD8-8A28-BA164F8F4F39}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +129,30 @@ Global
 		{5D2BF94D-59D5-96DD-67AA-FD337168498F}.Release|x64.Build.0 = Release|Any CPU
 		{5D2BF94D-59D5-96DD-67AA-FD337168498F}.Release|x86.ActiveCfg = Release|Any CPU
 		{5D2BF94D-59D5-96DD-67AA-FD337168498F}.Release|x86.Build.0 = Release|Any CPU
+		{4C10D4FA-BA88-488E-851C-2E447E6BD26B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C10D4FA-BA88-488E-851C-2E447E6BD26B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C10D4FA-BA88-488E-851C-2E447E6BD26B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4C10D4FA-BA88-488E-851C-2E447E6BD26B}.Debug|x64.Build.0 = Debug|Any CPU
+		{4C10D4FA-BA88-488E-851C-2E447E6BD26B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4C10D4FA-BA88-488E-851C-2E447E6BD26B}.Debug|x86.Build.0 = Debug|Any CPU
+		{4C10D4FA-BA88-488E-851C-2E447E6BD26B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C10D4FA-BA88-488E-851C-2E447E6BD26B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C10D4FA-BA88-488E-851C-2E447E6BD26B}.Release|x64.ActiveCfg = Release|Any CPU
+		{4C10D4FA-BA88-488E-851C-2E447E6BD26B}.Release|x64.Build.0 = Release|Any CPU
+		{4C10D4FA-BA88-488E-851C-2E447E6BD26B}.Release|x86.ActiveCfg = Release|Any CPU
+		{4C10D4FA-BA88-488E-851C-2E447E6BD26B}.Release|x86.Build.0 = Release|Any CPU
+		{A84EF7B5-22E7-4BD8-8A28-BA164F8F4F39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A84EF7B5-22E7-4BD8-8A28-BA164F8F4F39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A84EF7B5-22E7-4BD8-8A28-BA164F8F4F39}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A84EF7B5-22E7-4BD8-8A28-BA164F8F4F39}.Debug|x64.Build.0 = Debug|Any CPU
+		{A84EF7B5-22E7-4BD8-8A28-BA164F8F4F39}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A84EF7B5-22E7-4BD8-8A28-BA164F8F4F39}.Debug|x86.Build.0 = Debug|Any CPU
+		{A84EF7B5-22E7-4BD8-8A28-BA164F8F4F39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A84EF7B5-22E7-4BD8-8A28-BA164F8F4F39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A84EF7B5-22E7-4BD8-8A28-BA164F8F4F39}.Release|x64.ActiveCfg = Release|Any CPU
+		{A84EF7B5-22E7-4BD8-8A28-BA164F8F4F39}.Release|x64.Build.0 = Release|Any CPU
+		{A84EF7B5-22E7-4BD8-8A28-BA164F8F4F39}.Release|x86.ActiveCfg = Release|Any CPU
+		{A84EF7B5-22E7-4BD8-8A28-BA164F8F4F39}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
